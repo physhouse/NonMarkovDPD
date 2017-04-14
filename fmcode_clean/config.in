@@ -1,0 +1,9 @@
+info->start=1.164829
+info->end=5.450000
+info->boxLength=10.9174
+info->outputPrecision=0.001
+info->splineOrder=6
+info->numSplines=100
+info->decayStep=50
+info->dt=0.005
+info->steps=100000

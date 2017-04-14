@@ -1,0 +1,11 @@
+info->start=0.164829
+info->end=5.449829
+info->interval=0.001
+info->tableLength=5286
+info->boxLength=10.9174
+info->decaySteps=100
+info->temperature=2.50
+info->numParticles=64
+info->dt=0.005
+info->steps=100000
+info->mass=17.18
