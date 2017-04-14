@@ -140,7 +140,12 @@ int Frame::get()
   return numParticles;
 }
 
-void Frame::readFrame(std::vector<std::vector<double> > x, std::vector<std::vector<double> > v, std::vector<std::vector<double> > f, std::vector<std::vector<double> > r, std::vector<std::vector<double> > v1, std::vector<std::vector<double> > v2)
+void Frame::readFrame(std::vector<std::vector<double> > x, 
+                      std::vector<std::vector<double> > v, 
+                      std::vector<std::vector<double> > f, 
+                      std::vector<std::vector<double> > r, 
+                      std::vector<std::vector<double> > v1, 
+                      std::vector<std::vector<double> > v2)
 {
     ssize_t read;
     size_t len;

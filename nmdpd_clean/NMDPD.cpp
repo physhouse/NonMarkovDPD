@@ -183,23 +183,15 @@ void NMDPD::pairCompute()
                  e1x = pvector[2] / sqrt(pvector[1] * pvector[1] + pvector[2] * pvector[2]);
                  e1y = - (pvector[1] / pvector[2]) * e1x;
                  e1z = 0.0;
-                 //double p1 = (v[i][0] - v[j][0]) * e1x + (v[i][1] - v[j][1]) * e1y + (v[i][2] - v[j][2]) * e1z;
                  e2x = -pvector[3] * e1y;
                  e2y = pvector[3] * e1x;
                  e2z = pvector[1] * e1y - pvector[2] * e1x;
-                 //double p2 = (v[i][0] - v[j][0]) * e2x + (v[i][1] - v[j][1]) * e2y + (v[i][2] - v[j][2]) * e2z;
                  double magnitude = tapCoeffVertical[0] * sqrt(kT * verticalFriction);
          
                  vfx = magnitude * (randV1 * e1x + randV2 * e2x);
                  vfy = magnitude * (randV1 * e1y + randV2 * e2y);
                  vfz = magnitude * (randV1 * e1z + randV2 * e2z);
 
-                 //f[i][0] += fij * pvector[1] + vfij * p1 * e1x + vfij * p2 * e2x + vfx;
-                 //f[i][1] += fij * pvector[2] + vfij * p1 * e1y + vfij * p2 * e2y + vfy;
-                 //f[i][2] += fij * pvector[3] + vfij * p1 * e1z + vfij * p2 * e2z + vfz;
-                 //f[j][0] -= (fij * pvector[1] + vfij * p1 * e1x + vfij * p2 * e2x + vfx);
-                 //f[j][1] -= (fij * pvector[2] + vfij * p1 * e1y + vfij * p2 * e2y + vfy);
-                 //f[j][2] -= (fij * pvector[3] + vfij * p1 * e1z + vfij * p2 * e2z + vfz);
                  f[i][0] += fij * pvector[1] + vfij * vvx + vfx;
                  f[i][1] += fij * pvector[2] + vfij * vvy + vfy;
                  f[i][2] += fij * pvector[3] + vfij * vvz + vfz;
@@ -236,31 +228,15 @@ void NMDPD::pairCompute()
                      e1x = eij[2] / sqrt(eij[1] * eij[1] + eij[2] * eij[2]);
                      e1y = - (eij[1] / eij[2]) * e1x;
                      e1z = 0.0;
-                     //double p1 = (trajFrame->velocities[istep][i][0] - trajFrame->velocities[istep][j][0]) * e1x
-                     //                  + (trajFrame->velocities[istep][i][1] - trajFrame->velocities[istep][j][1]) * e1y
-                     //                  + (trajFrame->velocities[istep][i][2] - trajFrame->velocities[istep][j][2]) * e1z;
                      e2x = -eij[3] * e1y;
                      e2y = eij[3] * e1x;
                      e2z = eij[1] * e1y - eij[2] * e1x;
-                     //double p2 = (trajFrame->velocities[istep][i][0] - trajFrame->velocities[istep][j][0]) * e2x
-                     //                  + (trajFrame->velocities[istep][i][1] - trajFrame->velocities[istep][j][1]) * e2y
-                     //                  + (trajFrame->velocities[istep][i][2] - trajFrame->velocities[istep][j][2]) * e2z;
                      double magnitude = tapCoeffVertical[info->decaySteps-istep] * sqrt(kT * verticalFriction);
-                     //printf("e1 %lf e2 %lf eij %lf\n", e1x*e1x+e1y*e1y+e1z*e1z,e2x*e2x+e2y*e2y+e2z*e2z,eij[3]*eij[3]+eij[1]*eij[1]+eij[2]*eij[2]);
-                     //printf("e1 %lf e2 %lf eij %lf\n", e1x*e2x+e1y*e2y+e1z*e2z,e2x*eij[1]+e2y*eij[2]+e2z*eij[3],e1x*eij[1]+e1y*eij[2]+e1z*eij[3]);
-                     //printf("vvx %lf alternative %lf\n",vvx,p1*e1x+p2*e2x);
-                     //printf("step %d magnitude = %lf verticalFriction = %lf\n", istep, magnitude, verticalFriction);
          
                      vfx = magnitude * (trajFrame->pairRandomsV1[istep][i][j] * e1x + trajFrame->pairRandomsV2[istep][i][j] * e2x);
                      vfy = magnitude * (trajFrame->pairRandomsV1[istep][i][j] * e1y + trajFrame->pairRandomsV2[istep][i][j] * e2y);
                      vfz = magnitude * (trajFrame->pairRandomsV1[istep][i][j] * e1z + trajFrame->pairRandomsV2[istep][i][j] * e2z);
 
-                     //f[i][0] += fij * eij[1] + vfij * p1 * e1x + vfij * p2 * e2x + vfx;
-                     //f[i][1] += fij * eij[2] + vfij * p1 * e1y + vfij * p2 * e2y + vfy;
-                     //f[i][2] += fij * eij[3] + vfij * p1 * e1z + vfij * p2 * e2z + vfz;
-                     //f[j][0] -= (fij * eij[1] + vfij * p1 * e1x + vfij * p2 * e2x + vfx);
-                     //f[j][1] -= (fij * eij[2] + vfij * p1 * e1y + vfij * p2 * e2y + vfy);
-                     //f[j][2] -= (fij * eij[3] + vfij * p1 * e1z + vfij * p2 * e2z + vfz);
                      f[i][0] += fij * eij[1] + vfij * vvx + vfx;
                      f[i][1] += fij * eij[2] + vfij * vvy + vfy;
                      f[i][2] += fij * eij[3] + vfij * vvz + vfz;
@@ -268,8 +244,6 @@ void NMDPD::pairCompute()
                      f[j][1] -= (fij * eij[2] + vfij * vvy + vfy);
                      f[j][2] -= (fij * eij[3] + vfij * vvz + vfz);
                  }
-                 //if (i==0 && j==31)
-                   //printf("rij = %lf id %d fij = %lf random = %lf pp = %lf\n", eij[0], id, fij, trajFrame->pairRandoms[istep][i][j], trajFrame->positions[istep][i][0]);
              }
         }
     }
@@ -324,7 +298,6 @@ inline std::vector<double>  NMDPD::parallelVector(std::vector<double> x, std::ve
     result[1] = dx / r;
     result[2] = dy / r;
     result[3] = dz / r;
-    //printf("%lf %lf %lf <--> %lf %lf %lf %lf\n", dx, dy, dz, result[0], result[1], result[2], result[3]);
     return result;
 }
 
